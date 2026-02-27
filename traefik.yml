@@ -1,0 +1,17 @@
+# traefik.yml - Static Configuration
+api:
+  dashboard: true
+  insecure: true
+
+entryPoints:
+  synapse:
+    address: ":8008"
+
+providers:
+  file:
+    filename: dynamic.yml
+    watch: true
+
+log:
+  level: debug
+

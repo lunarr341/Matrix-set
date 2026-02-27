@@ -1,0 +1,31 @@
+http:
+  routers:
+    # Router for /voip/turnServer — routes to matrix-turnify
+    turnify-router:
+      entryPoints:
+        - synapse
+      rule: "PathPrefix(`/voip/turnServer`)"
+      priority: 32
+      service: matrix-turnify
+
+    # Catch-all router — routes everything else to Synapse
+    synapse-router:
+      entryPoints:
+        - synapse
+      rule: "PathPrefix(`/`)"
+      priority: 31
+      service: synapse-backend
+
+  services:
+    matrix-turnify:
+      loadBalancer:
+        servers:
+          - url: "http://admin-matirx-turnify-1:4499"
+
+    synapse-backend:
+      loadBalancer:
+        servers:
+          - url: "http://synapse:8008"
+
+
+                                                                      

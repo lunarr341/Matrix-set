@@ -1,0 +1,169 @@
+docker-socket-proxy-1  | time=2026-02-27T18:19:45.625Z level=INFO msg="starting socket-proxy" version=1.11.3 os=linux arch=arm64 runtime=go1.26.0 URL=github.com/wollomatic/socket-proxy
+docker-socket-proxy-1  | time=2026-02-27T18:19:45.625Z level=INFO msg="configuration info" socketpath=/var/run/docker.sock listenaddress=0.0.0.0:2375 loglevel=INFO logjson=false allowfrom=0.0.0.0/0 shutdowngracetime=10
+docker-socket-proxy-1  | time=2026-02-27T18:19:45.625Z level=INFO msg="watchdog disabled"
+docker-socket-proxy-1  | Default request allowlist:
+docker-socket-proxy-1  |    Method   Regex
+docker-socket-proxy-1  |    GET      ^/v1..{1,2}/(version|containers/.*|events.*)$
+docker-socket-proxy-1  |    HEAD     ^/_ping$
+docker-socket-proxy-1  |    POST     ^.*$
+docker-socket-proxy-1  | time=2026-02-27T18:19:45.633Z level=INFO msg="socket-proxy running and listening..."
+synapse                | Starting synapse with args -m synapse.app.homeserver --config-path /data/homeserver.yaml
+traefik-1              | 2026-02-27T18:19:45Z WRN github.com/traefik/traefik/v3/cmd/traefik/traefik.go:100 > Traefik can reject some encoded characters in the request path.When your backend is not fully compliant with [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986),it is recommended to set these options to `false` to avoid split-view situation.Refer to the documentation for more details: https://doc.traefik.io/traefik/v3.6/migrate/v3/#encoded-characters-configuration-default-values
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/cmd/traefik/traefik.go:113 > Traefik version 3.6.9 built on 2026-02-23T17:12:24Z version=3.6.9
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/cmd/traefik/traefik.go:119 > Static configuration loaded [json] staticConfiguration={"api":{"basePath":"/","dashboard":true,"insecure":true},"entryPoints":{"synapse":{"address":":8008","forwardedHeaders":{},"http":{"maxHeaderBytes":1048576,"sanitizePath":true},"http2":{"maxConcurrentStreams":250,"maxDecoderHeaderTableSize":4096,"maxEncoderHeaderTableSize":4096},"transport":{"lifeCycle":{"graceTimeOut":"10s"},"respondingTimeouts":{"idleTimeout":"3m0s","readTimeout":"1m0s"}},"udp":{"timeout":"3s"}},"traefik":{"address":":8080","forwardedHeaders":{},"http":{"maxHeaderBytes":1048576,"sanitizePath":true},"http2":{"maxConcurrentStreams":250,"maxDecoderHeaderTableSize":4096,"maxEncoderHeaderTableSize":4096},"transport":{"lifeCycle":{"graceTimeOut":"10s"},"respondingTimeouts":{"idleTimeout":"3m0s","readTimeout":"1m0s"}},"udp":{"timeout":"3s"}}},"global":{"checkNewVersion":true},"log":{"format":"common","level":"debug"},"providers":{"file":{"filename":"dynamic.yml","watch":true},"providersThrottleDuration":"2s"},"serversTransport":{"maxIdleConnsPerHost":200},"tcpServersTransport":{"dialKeepAlive":"15s","dialTimeout":"30s"}}
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/cmd/traefik/traefik.go:624 > Version check is enabled.
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/cmd/traefik/traefik.go:625 > Traefik checks for new releases to notify you if your version is out of date.
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/cmd/traefik/traefik.go:626 > It also collects usage data during this process.
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/cmd/traefik/traefik.go:627 > Check the documentation to get more info: https://doc.traefik.io/traefik/contributing/data-collection/
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/cmd/traefik/traefik.go:654 > 
+traefik-1              | Stats collection is disabled.
+traefik-1              | Help us improve Traefik by turning this feature on :)
+traefik-1              | More details on: https://doc.traefik.io/traefik/contributing/data-collection/
+traefik-1              | 
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/server/server_entrypoint_tcp.go:233 > Starting TCP Server entryPointName=traefik
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/server/server_entrypoint_tcp.go:233 > Starting TCP Server entryPointName=synapse
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/pkg/server/configurationwatcher.go:73 > Starting provider aggregator *aggregator.ProviderAggregator
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/pkg/provider/aggregator/aggregator.go:219 > Starting provider *file.Provider
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/provider/aggregator/aggregator.go:220 > *file.Provider provider configuration config={"filename":"dynamic.yml","watch":true}
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/provider/file/file.go:168 > add watcher on: .
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/provider/file/file.go:168 > add watcher on: dynamic.yml
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/pkg/provider/aggregator/aggregator.go:219 > Starting provider *traefik.Provider
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/provider/aggregator/aggregator.go:220 > *traefik.Provider provider configuration config={}
+traefik-1              | 2026-02-27T18:19:45Z INF github.com/traefik/traefik/v3/pkg/provider/aggregator/aggregator.go:219 > Starting provider *acme.ChallengeTLSALPN
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/provider/aggregator/aggregator.go:220 > *acme.ChallengeTLSALPN provider configuration config={}
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/server/configurationwatcher.go:227 > Configuration received config={"http":{"routers":{"synapse-router":{"entryPoints":["synapse"],"priority":31,"rule":"PathPrefix(`/`)","service":"synapse-backend"},"turnify-router":{"entryPoints":["synapse"],"priority":32,"rule":"PathPrefix(`/voip/turnServer`)","service":"matrix-turnify"}},"services":{"matrix-turnify":{"loadBalancer":{"passHostHeader":true,"responseForwarding":{"flushInterval":"100ms"},"servers":[{"url":"http://admin-matirx-turnify-1:4499"}],"strategy":"wrr"}},"synapse-backend":{"loadBalancer":{"passHostHeader":true,"responseForwarding":{"flushInterval":"100ms"},"servers":[{"url":"http://synapse:8008"}],"strategy":"wrr"}}}},"tcp":{},"tls":{},"udp":{}} providerName=file
+traefik-1              | 2026-02-27T18:19:45Z DBG github.com/traefik/traefik/v3/pkg/server/configurationwatcher.go:227 > Configuration received config={"http":{"middlewares":{"dashboard_redirect":{"redirectRegex":{"permanent":true,"regex":"^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$","replacement":"${1}/dashboard/"}},"dashboard_stripprefix":{"stripPrefix":{"prefixes":["/dashboard/","/dashboard"]}}},"routers":{"api":{"entryPoints":["traefik"],"priority":9223372036854775806,"rule":"PathPrefix(`/api`)","ruleSyntax":"default","service":"api@internal"},"dashboard":{"entryPoints":["traefik"],"middlewares":["dashboard_redirect@internal","dashboard_stripprefix@internal"],"priority":9223372036854775805,"rule":"PathPrefix(`/`)","ruleSyntax":"default","service":"dashboard@internal"}},"serversTransports":{"default":{"maxIdleConnsPerHost":200}},"services":{"api":{},"dashboard":{},"noop":{}}},"tcp":{"serversTransports":{"default":{"dialKeepAlive":"15s","dialTimeout":"30s"}}},"tls":{},"udp":{}} providerName=internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/tls/tlsmanager.go:386 > No default certificate, fallback to the internal generated certificate tlsStoreName=default
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/semconv.go:40 > Creating middleware entryPointName=traefik middlewareName=tracing middlewareType=SemConvServerMetrics
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/entrypoint.go:37 > Creating middleware entryPointName=traefik middlewareName=tracing middlewareType=TracingEntryPoint
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/stripprefix/strip_prefix.go:31 > Creating middleware entryPointName=traefik middlewareName=dashboard_stripprefix@internal middlewareType=StripPrefix routerName=dashboard@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/middleware.go:33 > Adding tracing to middleware entryPointName=traefik middlewareName=dashboard_stripprefix@internal routerName=dashboard@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/redirect/redirect_regex.go:17 > Creating middleware entryPointName=traefik middlewareName=dashboard_redirect@internal middlewareType=RedirectRegex routerName=dashboard@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/redirect/redirect_regex.go:18 > Setting up redirection from ^(http:\/\/(\[[\w:.]+\]|[\w\._-]+)(:\d+)?)\/$ to ${1}/dashboard/ entryPointName=traefik middlewareName=dashboard_redirect@internal middlewareType=RedirectRegex routerName=dashboard@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/middleware.go:33 > Adding tracing to middleware entryPointName=traefik middlewareName=dashboard_redirect@internal routerName=dashboard@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/router.go:37 > Added outgoing tracing middleware entryPointName=traefik middlewareName=tracing middlewareType=TracingRouter routerName=dashboard@internal serviceName=dashboard@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/semconv.go:40 > Creating middleware entryPointName=traefik middlewareName=tracing middlewareType=SemConvServerMetrics routerName=dashboard@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/entrypoint.go:37 > Creating middleware entryPointName=traefik middlewareName=tracing middlewareType=TracingEntryPoint routerName=dashboard@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/router.go:37 > Added outgoing tracing middleware entryPointName=traefik middlewareName=tracing middlewareType=TracingRouter routerName=api@internal serviceName=api@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/semconv.go:40 > Creating middleware entryPointName=traefik middlewareName=tracing middlewareType=SemConvServerMetrics routerName=api@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/entrypoint.go:37 > Creating middleware entryPointName=traefik middlewareName=tracing middlewareType=TracingEntryPoint routerName=api@internal
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/recovery/recovery.go:25 > Creating middleware entryPointName=traefik middlewareName=traefik-internal-recovery middlewareType=Recovery
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/semconv.go:40 > Creating middleware entryPointName=synapse middlewareName=tracing middlewareType=SemConvServerMetrics
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/entrypoint.go:37 > Creating middleware entryPointName=synapse middlewareName=tracing middlewareType=TracingEntryPoint
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/server/service/service.go:382 > Creating load-balancer entryPointName=synapse routerName=synapse-router@file serviceName=synapse-backend@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/server/service/service.go:440 > Creating server URL=http://synapse:8008 entryPointName=synapse routerName=synapse-router@file serverIndex=0 serviceName=synapse-backend@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/service.go:26 > Added outgoing tracing middleware entryPointName=synapse middlewareName=tracing middlewareType=TracingService routerName=synapse-router@file serviceName=synapse-backend@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/router.go:37 > Added outgoing tracing middleware entryPointName=synapse middlewareName=tracing middlewareType=TracingRouter routerName=synapse-router@file serviceName=synapse-backend@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/semconv.go:40 > Creating middleware entryPointName=synapse middlewareName=tracing middlewareType=SemConvServerMetrics routerName=synapse-router@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/entrypoint.go:37 > Creating middleware entryPointName=synapse middlewareName=tracing middlewareType=TracingEntryPoint routerName=synapse-router@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/server/service/service.go:382 > Creating load-balancer entryPointName=synapse routerName=turnify-router@file serviceName=matrix-turnify@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/server/service/service.go:440 > Creating server URL=http://admin-matirx-turnify-1:4499 entryPointName=synapse routerName=turnify-router@file serverIndex=0 serviceName=matrix-turnify@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/service.go:26 > Added outgoing tracing middleware entryPointName=synapse middlewareName=tracing middlewareType=TracingService routerName=turnify-router@file serviceName=matrix-turnify@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/router.go:37 > Added outgoing tracing middleware entryPointName=synapse middlewareName=tracing middlewareType=TracingRouter routerName=turnify-router@file serviceName=matrix-turnify@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/semconv.go:40 > Creating middleware entryPointName=synapse middlewareName=tracing middlewareType=SemConvServerMetrics routerName=turnify-router@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/entrypoint.go:37 > Creating middleware entryPointName=synapse middlewareName=tracing middlewareType=TracingEntryPoint routerName=turnify-router@file
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/recovery/recovery.go:25 > Creating middleware entryPointName=synapse middlewareName=traefik-internal-recovery middlewareType=Recovery
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/semconv.go:40 > Creating middleware entryPointName=synapse middlewareName=tracing middlewareType=SemConvServerMetrics
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/entrypoint.go:37 > Creating middleware entryPointName=synapse middlewareName=tracing middlewareType=TracingEntryPoint
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/semconv.go:40 > Creating middleware entryPointName=traefik middlewareName=tracing middlewareType=SemConvServerMetrics
+traefik-1              | 2026-02-27T18:19:46Z DBG github.com/traefik/traefik/v3/pkg/middlewares/observability/entrypoint.go:37 > Creating middleware entryPointName=traefik middlewareName=tracing middlewareType=TracingEntryPoint
+matrix-turnify-1       | [2026-02-27 18:19:47 +0000] [15] [DEBUG] Current configuration:
+matrix-turnify-1       |   config: ./gunicorn.conf.py
+matrix-turnify-1       |   wsgi_app: None
+matrix-turnify-1       |   bind: ['0.0.0.0:4499']
+matrix-turnify-1       |   backlog: 2048
+matrix-turnify-1       |   workers: 1
+matrix-turnify-1       |   worker_class: sync
+matrix-turnify-1       |   threads: 1
+matrix-turnify-1       |   worker_connections: 1000
+matrix-turnify-1       |   max_requests: 0
+matrix-turnify-1       |   max_requests_jitter: 0
+matrix-turnify-1       |   timeout: 30
+matrix-turnify-1       |   graceful_timeout: 30
+matrix-turnify-1       |   keepalive: 2
+matrix-turnify-1       |   limit_request_line: 4094
+matrix-turnify-1       |   limit_request_fields: 100
+matrix-turnify-1       |   limit_request_field_size: 8190
+matrix-turnify-1       |   reload: False
+matrix-turnify-1       |   reload_engine: auto
+matrix-turnify-1       |   reload_extra_files: []
+matrix-turnify-1       |   spew: False
+matrix-turnify-1       |   check_config: False
+matrix-turnify-1       |   print_config: False
+matrix-turnify-1       |   preload_app: False
+matrix-turnify-1       |   sendfile: None
+matrix-turnify-1       |   reuse_port: False
+matrix-turnify-1       |   chdir: /app
+matrix-turnify-1       |   daemon: False
+matrix-turnify-1       |   raw_env: []
+matrix-turnify-1       |   pidfile: None
+matrix-turnify-1       |   worker_tmp_dir: None
+matrix-turnify-1       |   user: 1000
+matrix-turnify-1       |   group: 114
+matrix-turnify-1       |   umask: 0
+matrix-turnify-1       |   initgroups: False
+matrix-turnify-1       |   tmp_upload_dir: None
+matrix-turnify-1       |   secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+matrix-turnify-1       |   forwarded_allow_ips: ['127.0.0.1', '::1']
+matrix-turnify-1       |   accesslog: -
+matrix-turnify-1       |   disable_redirect_access_to_syslog: False
+matrix-turnify-1       |   access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+matrix-turnify-1       |   errorlog: -
+matrix-turnify-1       |   loglevel: debug
+matrix-turnify-1       |   capture_output: False
+matrix-turnify-1       |   logger_class: gunicorn.glogging.Logger
+matrix-turnify-1       |   logconfig: None
+matrix-turnify-1       |   logconfig_dict: {}
+matrix-turnify-1       |   logconfig_json: None
+matrix-turnify-1       |   syslog_addr: udp://localhost:514
+matrix-turnify-1       |   syslog: False
+matrix-turnify-1       |   syslog_prefix: None
+matrix-turnify-1       |   syslog_facility: user
+matrix-turnify-1       |   enable_stdio_inheritance: False
+matrix-turnify-1       |   statsd_host: None
+matrix-turnify-1       |   dogstatsd_tags: 
+matrix-turnify-1       |   statsd_prefix: 
+matrix-turnify-1       |   proc_name: None
+matrix-turnify-1       |   default_proc_name: turnify:app
+matrix-turnify-1       |   pythonpath: None
+matrix-turnify-1       |   paste: None
+matrix-turnify-1       |   on_starting: <function OnStarting.on_starting at 0x7ffee7deaa70>
+matrix-turnify-1       |   on_reload: <function OnReload.on_reload at 0x7ffee7deab90>
+matrix-turnify-1       |   when_ready: <function WhenReady.when_ready at 0x7ffee7deacb0>
+matrix-turnify-1       |   pre_fork: <function Prefork.pre_fork at 0x7ffee7deadd0>
+matrix-turnify-1       |   post_fork: <function Postfork.post_fork at 0x7ffee7deaef0>
+matrix-turnify-1       |   post_worker_init: <function PostWorkerInit.post_worker_init at 0x7ffee7deb010>
+matrix-turnify-1       |   worker_int: <function WorkerInt.worker_int at 0x7ffee7deb130>
+matrix-turnify-1       |   worker_abort: <function WorkerAbort.worker_abort at 0x7ffee7deb250>
+matrix-turnify-1       |   pre_exec: <function PreExec.pre_exec at 0x7ffee7deb370>
+matrix-turnify-1       |   pre_request: <function PreRequest.pre_request at 0x7ffee7deb490>
+matrix-turnify-1       |   post_request: <function PostRequest.post_request at 0x7ffee7deb520>
+matrix-turnify-1       |   child_exit: <function ChildExit.child_exit at 0x7ffee7deb640>
+matrix-turnify-1       |   worker_exit: <function WorkerExit.worker_exit at 0x7ffee7deb760>
+matrix-turnify-1       |   nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7ffee7deb880>
+matrix-turnify-1       |   on_exit: <function OnExit.on_exit at 0x7ffee7deb9a0>
+matrix-turnify-1       |   ssl_context: <function NewSSLContext.ssl_context at 0x7ffee7debac0>
+matrix-turnify-1       |   proxy_protocol: False
+matrix-turnify-1       |   proxy_allow_ips: ['127.0.0.1', '::1']
+matrix-turnify-1       |   keyfile: None
+matrix-turnify-1       |   certfile: None
+matrix-turnify-1       |   ssl_version: 2
+matrix-turnify-1       |   cert_reqs: 0
+matrix-turnify-1       |   ca_certs: None
+matrix-turnify-1       |   suppress_ragged_eofs: True
+matrix-turnify-1       |   do_handshake_on_connect: False
+matrix-turnify-1       |   ciphers: None
+matrix-turnify-1       |   raw_paste_global_conf: []
+matrix-turnify-1       |   permit_obsolete_folding: False
+matrix-turnify-1       |   strip_header_spaces: False
+matrix-turnify-1       |   permit_unconventional_http_method: False
+matrix-turnify-1       |   permit_unconventional_http_version: False
+matrix-turnify-1       |   casefold_http_method: False
+matrix-turnify-1       |   forwarder_headers: ['SCRIPT_NAME', 'PATH_INFO']
+matrix-turnify-1       |   header_map: drop
+matrix-turnify-1       | [2026-02-27 18:19:47 +0000] [15] [INFO] Starting gunicorn 23.0.0
+matrix-turnify-1       | [2026-02-27 18:19:47 +0000] [15] [DEBUG] Arbiter booted
+matrix-turnify-1       | [2026-02-27 18:19:47 +0000] [15] [INFO] Listening at: http://0.0.0.0:4499 (15)
+matrix-turnify-1       | [2026-02-27 18:19:47 +0000] [15] [INFO] Using worker: sync
+matrix-turnify-1       | [2026-02-27 18:19:47 +0000] [18] [INFO] Booting worker with pid: 18
+matrix-turnify-1       | [2026-02-27 18:19:48 +0000] [15] [DEBUG] 1 workers

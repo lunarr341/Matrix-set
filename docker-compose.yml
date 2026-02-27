@@ -1,0 +1,103 @@
+networks:
+  traefik:
+services:
+  docker-socket-proxy:
+    image: wollomatic/socket-proxy:1.11.3
+    restart: unless-stopped
+    user: 1000:114
+    volumes:
+      - /run/user/1000/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - traefik
+    command:
+      - '-allowfrom=admin-traefik-1'
+      - '-allowGET=.*'
+      - '-allowPOST=.*'
+      - -proxyport=2375
+      - -allowfrom=172.18.0.4:32882
+      - -allowfrom=172.18.0.4:41404
+      - -allowfrom=0.0.0.0/0
+      - -allowGET=/v1..{1,2}/(version|containers/.*|events.*)
+      - -listenip=0.0.0.0
+    environment:
+      CONTAINERS: 1
+      SERVICES: 1
+      TASKS: 1
+      NETWORKS: 1
+      VERSION: 1
+      SP_ALLOW_GET: "/_ping"
+      SP_ALLOW_HEAD: "/_ping"
+  traefik:
+    image: traefik:v3.6.9
+      user: 1000:114
+    environment:
+      - DOCKER_HOST=tcp://admin-docker-socket-proxy-1:2375
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --log.level=DEBUG
+      - --accesslog=true
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - --providers.docker.endpoint=tcp://admin-docker-socket-proxy-1:2375
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - ./traefik.yml:/traefik.yml:ro
+      - ./dynamic.yml:/dynamic.yml:ro
+    networks:
+      - traefik
+    depends_on:
+      - docker-socket-proxy
+  matrix-turnify:
+    # latest for the most recent stable build.
+    # edge for the most recent build, possibly unstable.
+    # otherwise, specify a version number (e.g. v1.1)
+    image: ghcr.io/bpbradley/matrix-turnify:latest
+      restart: unless-stopped
+    user: 1000:114
+    # This is the network your matrix server is accessible on. 
+    # Not needed if on default network
+    networks:
+      - traefik
+    environment:
+      - SYNAPSE_BASE_URL=${SYNAPSE_BASE_URL}
+      - CF_TURN_TOKEN_ID=${CF_TURN_TOKEN_ID}
+      - CF_TURN_API_TOKEN=${CF_TURN_API_TOKEN}
+      - TURN_CREDENTIAL_TTL_SECONDS=${TURN_CREDENTIAL_TTL_SECONDS:-86400}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    # Extra security options since this container needs very little permissions
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    # Configuration with traefik. Adjust according to your own setup. 
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.matrix-turnify.entrypoints=https
+      - traefik.http.services.matrix-turnify.loadbalancer.server.port=4499
+      # Turnify ONLY wants to handle this endpoint (voip/turnServer)
+      # All other traffic should go straight to synapse
+      # Host MUST match your matrix server hostname for clients to reach
+      - traefik.http.routers.matrix-turnify.rule=Host(`sleepy.sleeping-cat.monster`)&&
+        PathRegexp(`^/_matrix/client/(api/v1|r0|v3|unstable)/voip/turnServer`)
+      # synapse (matrix.example.com) has priority 31 or lower
+      # so this server gets priority for JUST the voip/turnServer path above
+           - traefik.http.routers.matrix-turnify.priority=31
+      - traefik.http.routers.matrix-turnify.tls=true
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: synapse
+    volumes:
+      - ./synapse/data:/data
+      - ./synapse/data/homeserver.yaml:/config/homeserver.yaml
+    ports:
+      - "8008:8008"
+    restart: unless-stopped
+    networks:
+      - traefik

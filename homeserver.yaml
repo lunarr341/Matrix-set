@@ -1,0 +1,40 @@
+server_name: "sleepy.sleeping-cat.monster"
+pid_file: /data/homeserver.pid
+# Federation settings
+federation_domain_whitelist: []
+allow_public_rooms_hidden_on_federation: false
+allow_profile_lookup_over_federation: false
+allow_device_name_lookup_over_federation: false
+allow_public_rooms_over_federation: false
+turn_username_lifetime: 86400
+app_service_config_files:
+  - /data/out-of-your-element/registration.yaml
+
+presence:
+  enabled: true
+  update_interval: 60000
+
+listeners:
+  - port: 8008
+    resources:
+    - compress: false
+      names:
+      - client
+    tls: false
+    type: http
+    x_forwarded: true
+database:
+  name: sqlite3
+  args:
+    database: #
+log_config: "#"
+media_store_path: #
+registration_shared_secret: "############"
+report_stats: false
+macaroon_secret_key: "#"
+form_secret: "#"
+signing_key_path: "#"
+trusted_key_servers:
+- server_name: sleepy.sleeping-cat.monster
+
+# vim:ft=yaml
